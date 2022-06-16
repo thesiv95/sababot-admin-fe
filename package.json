@@ -1,0 +1,42 @@
+{
+  "name": "sababot-admin-fe",
+  "version": "0.0.0",
+  "description": "Frontend for Discord sababushka bot data control panel",
+  "author": {
+    "email": "dj.active.17@gmail.com",
+    "name": "Ilya Soloveychik"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build-super": "run-p type-check build",
+    "preview": "vite preview --port 4173",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && echo Lint OK",
+    "changelog": "standard-version"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "pinia": "^2.0.14",
+    "vue": "^3.2.36",
+    "vue-router": "^4.0.15",
+    "vue-sweetalert2": "^5.0.5"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@types/node": "^16.11.40",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/tsconfig": "^0.1.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "standard-version": "^9.5.0",
+    "typescript": "~4.7.2",
+    "vite": "^2.9.9",
+    "vue-tsc": "^0.35.2"
+  }
+}
