@@ -98,7 +98,7 @@ export default {
       });
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
-          `/bituyim/remove/${recordId}`
+          `/youtube/remove/${recordId}`
         );
         if (!apiResponse.isError && apiResponse.code === 200) {
           Toast.fire({
