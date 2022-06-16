@@ -22,6 +22,7 @@ export default {
           icon: "error",
           title: `Нет уроков с индексом ${number}`,
         });
+        return;
       }
       this.items = items;
       this.loading = false;
