@@ -130,19 +130,7 @@ export default {
     },
     async showAddWindow() {
       // toast appears for several seconds at right top
-      const Toast = this.$swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast: {
-          addEventListener: (arg0: string, arg1: any) => void;
-        }) => {
-          toast.addEventListener("mouseenter", this.$swal.stopTimer);
-          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
-        },
-      });
+      const Toast = getToast(this.$swal);
 
       const { value: formValues } = await this.$swal.fire({
         title: "Добавить",

@@ -143,6 +143,42 @@ export default {
         return;
       }
     },
+    async addNewUser(){
+      const Toast = getToast(this.$swal);
+
+      const { value: formValues } = await this.$swal.fire({
+        title: "Добавить пользователя",
+        html:
+          '<input id="username" placeholder="ник" class="swal2-input">' +
+          '<input id="userid" placeholder="id в дискорде" class="swal2-input">',
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("username").value!,
+            document.getElementById("userid").value!,
+          ];
+        },
+      });
+
+      if (formValues) {
+        const [username, userId] = formValues;
+
+        const apiResponse = await Api.doGetRequest(`/reminders/on?userId=${userId}&userName=${username}`);
+
+        if (apiResponse && apiResponse.isNewUser) {
+          Toast.fire({
+            icon: "success",
+            title: "Пользователь добавлен в базу",
+          });
+        } else {
+          console.error(apiResponse);
+          Toast.fire({
+            icon: "error",
+            title: "Произошла ошибка",
+          });
+        }
+      }
+    },
   },
   data() {
     return {
@@ -188,5 +224,6 @@ export default {
     <input v-on:change="searchByUsername" type="text" placeholder="Поиск ника" />
     <input v-on:change="searchByPage" type="number" placeholder="Страница" value="1" />
     <button v-on:click="showRestoreWindow">Восстановить все</button>
+    <button v-on:click="addNewUser">Добавить</button>
   </div>
 </template>
