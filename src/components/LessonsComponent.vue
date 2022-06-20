@@ -226,7 +226,7 @@ export default {
         // get number field
         const currentPage = event.path[6].children[1].children[1].value || 1;
         const items = await Api.doGetRequest(
-          `/lessons/getAllItems?sort=1&page=${currentPage}`
+          `/youtube/getAllItems?sort=1&page=${currentPage}`
         );
         this.items = items;
         this.loading = false;
@@ -238,7 +238,7 @@ export default {
       setTimeout(async () => {
         const currentPage = event.path[6].children[1].children[1].value || 1;
         const items = await Api.doGetRequest(
-          `/lessons/getAllItems?sort=-1&page=${currentPage}`
+          `/youtube/getAllItems?sort=-1&page=${currentPage}`
         );
         this.items = items;
         this.loading = false;
