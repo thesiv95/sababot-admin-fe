@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "build-super": "run-p type-check build",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit",
@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "pinia": "^2.0.14",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15",
     "vue-sweetalert2": "^5.0.5"

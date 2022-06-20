@@ -2,22 +2,24 @@
 import * as Api from "@/utils/api";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
+import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
 export default {
   methods: {
-    searchByWord(event: { target: { value: string } }) {
+    searchByWord(event: {
+      target: {
+        value: string;
+      };
+    }) {
       const Toast = getToast(this.$swal);
-
       setTimeout(async () => {
         const q = event.target.value;
         let items;
-
         if (!q) {
           items = await Api.doGetRequest("/words/getAllItems");
         } else {
           items = await Api.doGetRequest(`/words/search?q=${q}`);
         }
-
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
@@ -27,15 +29,17 @@ export default {
         }
         this.items = items;
         this.loading = false;
-      }, 1000);
+      }, DELAY_API_REQUEST_MS);
     },
-    searchByPage(event: { target: { value: string } }) {
+    searchByPage(event: {
+      target: {
+        value: string;
+      };
+    }) {
       const Toast = getToast(this.$swal);
       setTimeout(async () => {
         const page = event.target.value || 1;
-        const items = await Api.doGetRequest(
-          `/words/getAllItems?page=${page}`
-        );
+        const items = await Api.doGetRequest(`/words/getAllItems?page=${page}`);
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
@@ -45,10 +49,14 @@ export default {
         }
         this.items = items;
         this.loading = false;
-      }, 1000);
+      }, DELAY_API_REQUEST_MS);
     },
     async showModifyWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: {
+        children: {
+          innerText: any;
+        }[];
+      }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID and current data
@@ -58,9 +66,7 @@ export default {
         event.path[2].children[2].innerText,
         event.path[2].children[3].innerText,
       ];
-
       const [he, translit, ru] = currentData;
-
       const { value: formValues } = await this.$swal.fire({
         title: "Изменить",
         html:
@@ -76,10 +82,8 @@ export default {
           ];
         },
       });
-
       if (formValues) {
         const [ru, translit, he] = formValues;
-
         const apiResponse = await Api.doPutRequest(
           `/words/modify/${recordId}`,
           {
@@ -88,7 +92,6 @@ export default {
             he,
           }
         );
-
         if (!apiResponse.isError && apiResponse.code === 202) {
           Toast.fire({
             icon: "success",
@@ -104,7 +107,11 @@ export default {
       }
     },
     async showDeleteWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: {
+        children: {
+          innerText: any;
+        }[];
+      }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID
@@ -132,7 +139,6 @@ export default {
     },
     async showAddWindow() {
       const Toast = getToast(this.$swal);
-
       const { value: formValues } = await this.$swal.fire({
         title: "Добавить",
         html:
@@ -148,16 +154,13 @@ export default {
           ];
         },
       });
-
       if (formValues) {
         const [ru, translit, he] = formValues;
-
         const apiResponse = await Api.doPostRequest("/words/addNew", {
           ru,
           translit,
           he,
         });
-
         if (!apiResponse.isError && apiResponse.code === 201) {
           Toast.fire({
             icon: "success",
@@ -193,6 +196,43 @@ export default {
         return;
       }
     },
+    sortAsc(event: {
+      path: {
+        children: {
+          children: {
+            value: number;
+          }[];
+        }[];
+      }[];
+    }) {
+      setTimeout(async () => {
+        // get number field
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/words/getAllItems?sort=1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
+    sortDesc(event: {
+      path: {
+        children: {
+          children: {
+            value: number;
+          }[];
+        }[];
+      }[];
+    }) {
+      setTimeout(async () => {
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/words/getAllItems?sort=-1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
   },
   data() {
     return {
@@ -213,7 +253,11 @@ export default {
     <table class="main_table" v-if="!this.loading && this.items.length > 0">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>
+            ID
+            <button v-on:click="sortAsc">▲</button>
+            <button v-on:click="sortDesc">▼</button>
+          </th>
           <th>На иврите</th>
           <th>Транскрипция</th>
           <th>На русском</th>
@@ -236,7 +280,12 @@ export default {
   </div>
   <div>
     <input v-on:change="searchByWord" type="text" placeholder="Поиск слова" />
-    <input v-on:change="searchByPage" type="number" placeholder="Страница" value="1" />
+    <input
+      v-on:change="searchByPage"
+      type="number"
+      placeholder="Страница"
+      value="1"
+    />
     <button v-on:click="showAddWindow">Добавить...</button>
     <button v-on:click="showRestoreWindow">Восстановить все</button>
   </div>

@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const baseURL = "https://sababot-crud.herokuapp.com";
-const xApiKey = "1149c713-3a9e-4a13-9171-e250da21bd7e";
+// all env vars should start from VITE_blablabla
+// see docs: https://vitejs.dev/config/#envprefix
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+const xApiKey = import.meta.env.VITE_API_KEY;
 
 const axiosInstance = axios.create({
   baseURL,

@@ -2,6 +2,7 @@
 import * as Api from "@/utils/api";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
+import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
 export default {
   methods: {
@@ -152,7 +153,7 @@ export default {
         }
         this.items = items;
         this.loading = false;
-      }, 1000);
+      }, DELAY_API_REQUEST_MS);
     },
     async showAddWindow() {
       // toast appears for several seconds at right top
@@ -218,6 +219,31 @@ export default {
         return;
       }
     },
+    sortAsc(event: {
+      path: { children: { children: { value: number }[] }[] }[];
+    }) {
+      setTimeout(async () => {
+        // get number field
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/lessons/getAllItems?sort=1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
+    sortDesc(event: {
+      path: { children: { children: { value: number }[] }[] }[];
+    }) {
+      setTimeout(async () => {
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/lessons/getAllItems?sort=-1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
   },
   data() {
     return {
@@ -238,7 +264,11 @@ export default {
     <table class="main_table" v-if="!this.loading && this.items.length > 0">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>
+            ID
+            <button v-on:click="sortAsc">▲</button>
+            <button v-on:click="sortDesc">▼</button>
+          </th>
           <th>Номер</th>
           <th>Название</th>
           <th>Ссылка</th>

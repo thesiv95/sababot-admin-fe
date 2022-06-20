@@ -2,6 +2,7 @@
 import * as Api from "@/utils/api";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
+import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
 export default {
   methods: {
@@ -114,7 +115,7 @@ export default {
         }
         this.items = items;
         this.loading = false;
-      }, 1000);
+      }, DELAY_API_REQUEST_MS);
     },
     async showDeleteWindow(event: {
       path: { children: { innerText: any }[] }[];
@@ -143,7 +144,7 @@ export default {
         return;
       }
     },
-    async addNewUser(){
+    async addNewUser() {
       const Toast = getToast(this.$swal);
 
       const { value: formValues } = await this.$swal.fire({
@@ -179,6 +180,31 @@ export default {
         }
       }
     },
+    sortAsc(event: {
+      path: { children: { children: { value: number }[] }[] }[];
+    }) {
+      setTimeout(async () => {
+        // get number field
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/reminders/getAllItems?sort=1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
+    sortDesc(event: {
+      path: { children: { children: { value: number }[] }[] }[];
+    }) {
+      setTimeout(async () => {
+        const currentPage = event.path[6].children[1].children[1].value || 1;
+        const items = await Api.doGetRequest(
+          `/reminders/getAllItems?sort=-1&page=${currentPage}`
+        );
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
+    },
   },
   data() {
     return {
@@ -199,7 +225,11 @@ export default {
     <table class="main_table" v-if="!this.loading && this.items.length > 0">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>
+            ID
+            <button v-on:click="sortAsc">▲</button>
+            <button v-on:click="sortDesc">▼</button>
+          </th>
           <th>Пользователь</th>
           <th>Идентификатор</th>
           <th>Статус</th>

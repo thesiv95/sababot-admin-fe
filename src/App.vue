@@ -1,11 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-// TODO:
-// 1. search field
-// 2. pagination (add routes to backend!)
-// 3. add item
-// 4. modify
-// 5. delete
 </script>
 
 <template>
@@ -58,35 +52,29 @@ import { RouterLink, RouterView } from "vue-router";
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink to="/nsfws" class="t-menu__link-item menu"
-                      >18+</RouterLink
-                    >
+                    <RouterLink to="/nsfws" class="t-menu__link-item menu">
+                      18+
+                    </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink to="/bituyim" class="t-menu__link-item menu"
-                      >Поговорки</RouterLink
-                    >
+                    <RouterLink to="/bituyim" class="t-menu__link-item menu">
+                      Поговорки
+                    </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink to="/tshokim" class="t-menu__link-item menu"
-                      >Шутки</RouterLink
-                    >
+                    <RouterLink to="/tshokim" class="t-menu__link-item menu">
+                      Шутки
+                    </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink
-                      to="/lessons"
-                      class="t-menu__link-item menu"
-                      href="#"
-                      >Уроки</RouterLink
-                    >
+                    <RouterLink to="/lessons" class="t-menu__link-item menu">
+                      Уроки
+                    </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink
-                      to="/reminder"
-                      class="t-menu__link-item menu"
-                      href="#"
-                      >Напоминалка</RouterLink
-                    >
+                    <RouterLink to="/reminder" class="t-menu__link-item menu">
+                      Напоминалка
+                    </RouterLink>
                   </li>
                 </ul>
               </div>
@@ -110,6 +98,9 @@ import { RouterLink, RouterView } from "vue-router";
         <div class="t-col t-col_12">
           <div class="t102 t-align_center">
             <RouterView />
+            <br />
+            <br />
+            <p class="copyright">&copy; thesiv95, 2022</p>
           </div>
         </div>
       </div>
@@ -119,4 +110,8 @@ import { RouterLink, RouterView } from "vue-router";
   <!--/allrecords-->
 </template>
 
-<style></style>
+<style>
+.copyright {
+  color: black;
+}
+</style>
