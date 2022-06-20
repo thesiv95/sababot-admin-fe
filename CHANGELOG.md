@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.0...v1.2.0) (2022-06-20)
+
+
+### Features
+
+* sort, env, some code refactoring ([9786b9b](https://github.com/thesiv95/sababot-admin-fe/commit/9786b9bdeb4f88d5482c1b64140e56f0c9c27402))
+
 ## [1.1.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.0.2...v1.1.0) (2022-06-18)
 
 
