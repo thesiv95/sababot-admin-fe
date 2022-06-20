@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/thesiv95/sababot-admin-fe/compare/v1.2.1...v1.2.2) (2022-06-20)
+
+
+### Bug Fixes
+
+* confirmation shows word instead of ID ([5838043](https://github.com/thesiv95/sababot-admin-fe/commit/583804303e53aba9ce2e1665f74eec64335d8a24))
+* cut too long text from delete window where needed ([9242760](https://github.com/thesiv95/sababot-admin-fe/commit/92427603baff96268622a1e58d65327b185e44b6))
+
 ### [1.2.1](https://github.com/thesiv95/sababot-admin-fe/compare/v1.2.0...v1.2.1) (2022-06-20)
 
 
