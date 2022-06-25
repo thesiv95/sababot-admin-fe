@@ -28,6 +28,4 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - run: cd dist && cp -r assets/* /var/www/html/assets/
-    - run: cp favicon.ico /var/www/html/favicon.co
-    - run: cp index.html /var/www/html/index.html
+    - run: cd dist && cp -r assets/* /var/www/html/assets/ && cp favicon.ico /var/www/html/favicon.co && cp index.html /var/www/html/index.html
