@@ -113,5 +113,6 @@ import { RouterLink, RouterView } from "vue-router";
 <style>
 .copyright {
   color: black;
+  font-weight: bold;
 }
 </style>
