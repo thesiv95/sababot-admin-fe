@@ -93,7 +93,7 @@ export default {
           return;
         }
       } else {
-        items = await Api.doGetRequest('/reminders/getAllItems');
+        items = await Api.doGetRequest("/reminders/getAllItems");
       }
 
       this.items = items;
@@ -118,7 +118,7 @@ export default {
       }, DELAY_API_REQUEST_MS);
     },
     async showDeleteWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get user ID
@@ -164,7 +164,9 @@ export default {
       if (formValues) {
         const [username, userId] = formValues;
 
-        const apiResponse = await Api.doGetRequest(`/reminders/on?userId=${userId}&userName=${username}`);
+        const apiResponse = await Api.doGetRequest(
+          `/reminders/on?userId=${userId}&userName=${username}`
+        );
 
         if (apiResponse && apiResponse.isNewUser) {
           Toast.fire({
@@ -251,8 +253,17 @@ export default {
     </table>
   </div>
   <div>
-    <input v-on:change="searchByUsername" type="text" placeholder="Поиск ника" />
-    <input v-on:change="searchByPage" type="number" placeholder="Страница" value="1" />
+    <input
+      v-on:change="searchByUsername"
+      type="text"
+      placeholder="Поиск ника"
+    />
+    <input
+      v-on:change="searchByPage"
+      type="number"
+      placeholder="Страница"
+      value="1"
+    />
     <button v-on:click="showRestoreWindow">Восстановить все</button>
     <button v-on:click="addNewUser">Добавить</button>
   </div>

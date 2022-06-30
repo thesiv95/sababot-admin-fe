@@ -1,4 +1,5 @@
 const showConfirmation = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   swalInstance: any,
   text: string,
   toDelete = true

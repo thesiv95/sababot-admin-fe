@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RemindersComponent from '@/components/RemindersComponent.vue';
+import RemindersComponent from "@/components/RemindersComponent.vue";
 </script>
 
 <template>

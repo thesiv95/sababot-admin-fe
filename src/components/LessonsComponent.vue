@@ -6,7 +6,7 @@ import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
 export default {
   methods: {
-    async searchByNumber(event: { target: { value: any; }; }) {
+    async searchByNumber(event: { target: { value: string } }) {
       const Toast = getToast(this.$swal);
       const number = event.target.value;
 
@@ -29,7 +29,7 @@ export default {
       this.loading = false;
     },
     async showModifyWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID and current data
@@ -85,7 +85,7 @@ export default {
       }
     },
     async showDeleteWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID
@@ -118,7 +118,7 @@ export default {
         return;
       }
     },
-    async searchByText(event: { target: { value: any; }; }) {
+    async searchByText(event: { target: { value: string } }) {
       const Toast = getToast(this.$swal);
       const text = event.target.value;
 
@@ -133,7 +133,9 @@ export default {
       if (!items || items.length === 0) {
         Toast.fire({
           icon: "error",
-          title: `Нет уроков с названием, содержащим ${text.length >= 10 ? text.slice(0, 10) : text}`,
+          title: `Нет уроков с названием, содержащим ${
+            text.length >= 10 ? text.slice(0, 10) : text
+          }`,
         });
       }
       this.items = items;
@@ -143,7 +145,9 @@ export default {
       const Toast = getToast(this.$swal);
       setTimeout(async () => {
         const page = event.target.value || 1;
-        const items = await Api.doGetRequest(`/youtube/getAllItems?page=${page}`);
+        const items = await Api.doGetRequest(
+          `/youtube/getAllItems?page=${page}`
+        );
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
@@ -200,7 +204,11 @@ export default {
     },
     async showRestoreWindow() {
       const Toast = getToast(this.$swal);
-      const confirmation = await showConfirmation(this.$swal, "ссылки на уроки", false);
+      const confirmation = await showConfirmation(
+        this.$swal,
+        "ссылки на уроки",
+        false
+      );
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doGetRequest("/youtube/restore");
         if (apiResponse && apiResponse.restored) {

@@ -51,7 +51,7 @@ export default {
       }, DELAY_API_REQUEST_MS);
     },
     async showModifyWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID and current data
@@ -107,12 +107,12 @@ export default {
       }
     },
     async showDeleteWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID
       const recordId = event.path[2].children[0].innerText;
-      const word = event.path[2].children[3].innerText.slice(0, 12) + '...';
+      const word = event.path[2].children[3].innerText.slice(0, 12) + "...";
       const confirmation = await showConfirmation(this.$swal, word);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(

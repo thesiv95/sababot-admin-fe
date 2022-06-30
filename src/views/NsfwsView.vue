@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NsfwsComponent from '@/components/NsfwsComponent.vue';
+import NsfwsComponent from "@/components/NsfwsComponent.vue";
 </script>
 
 <template>

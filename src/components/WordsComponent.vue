@@ -54,7 +54,7 @@ export default {
     async showModifyWindow(event: {
       path: {
         children: {
-          innerText: any;
+          innerText: string;
         }[];
       }[];
     }) {
@@ -109,7 +109,7 @@ export default {
     async showDeleteWindow(event: {
       path: {
         children: {
-          innerText: any;
+          innerText: string;
         }[];
       }[];
     }) {

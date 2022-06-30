@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TshokimComponent from '@/components/TshokimComponent.vue';
+import TshokimComponent from "@/components/TshokimComponent.vue";
 </script>
 
 <template>

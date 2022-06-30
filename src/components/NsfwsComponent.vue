@@ -47,7 +47,7 @@ export default {
       }, DELAY_API_REQUEST_MS);
     },
     async showModifyWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID and current data
@@ -103,7 +103,7 @@ export default {
       }
     },
     async showDeleteWindow(event: {
-      path: { children: { innerText: any }[] }[];
+      path: { children: { innerText: string }[] }[];
     }) {
       const Toast = getToast(this.$swal);
       // get record ID
@@ -175,7 +175,11 @@ export default {
     },
     async showRestoreWindow() {
       const Toast = getToast(this.$swal);
-      const confirmation = await showConfirmation(this.$swal, "слова 18+", false);
+      const confirmation = await showConfirmation(
+        this.$swal,
+        "слова 18+",
+        false
+      );
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doGetRequest("/nsfws/restore");
         if (apiResponse && apiResponse.restored) {
