@@ -100,7 +100,7 @@ import { RouterLink, RouterView } from "vue-router";
             <RouterView />
             <br />
             <br />
-            <p class="copyright">&copy; thesiv95, 2022</p>
+            <p class="copyright">&copy; thesiv95, 2022{{new Date().getFullYear() === 2022 ? '' : `-${new Date().getFullYear()}`}}</p>
           </div>
         </div>
       </div>
