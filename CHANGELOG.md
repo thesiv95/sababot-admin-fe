@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.0...v1.3.1) (2022-07-02)
+
+
+### Bug Fixes
+
+* slice word confirmation window ([21ef946](https://github.com/thesiv95/sababot-admin-fe/commit/21ef946846d2b7afb7853d4bad65a63cad39b4b5))
+
 ## [1.3.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.2.2...v1.3.0) (2022-06-30)
 
 
