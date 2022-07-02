@@ -116,7 +116,7 @@ export default {
       const Toast = getToast(this.$swal);
       // get record ID
       const recordId = event.path[2].children[0].innerText;
-      const word = event.path[2].children[3].innerText;
+      const word = event.path[2].children[3].innerText.slice(0, 15) + "...";
       const confirmation = await showConfirmation(this.$swal, word);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
