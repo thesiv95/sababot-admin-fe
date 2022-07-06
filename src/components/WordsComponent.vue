@@ -18,12 +18,14 @@ export default {
         if (!q) {
           items = await Api.doGetRequest("/words/getAllItems");
         } else {
-          items = await Api.doGetRequest(`/words/search?q=${q}`);
+          items = await Api.doGetRequest(`/words/search?q=${q}&admin=true`);
         }
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
-            title: `Нет слов по запросу ${q} в базе`,
+            title: `Нет слов по запросу ${
+              q.length > 10 ? q.slice(0, 10) + "..." : q
+            } в базе`,
           });
           return;
         }
@@ -163,6 +165,7 @@ export default {
           he,
         });
         if (!apiResponse.isError && apiResponse.code === 201) {
+          this.items.unshift(apiResponse.data); // add visually
           Toast.fire({
             icon: "success",
             title: "Слово добавлено в базу",

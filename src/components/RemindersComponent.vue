@@ -83,7 +83,7 @@ export default {
       let items;
       if (username) {
         items = await Api.doGetRequest(
-          `/reminders/getItemsByNickname?name=${username}`
+          `/reminders/getItemsByNickname?name=${username}&admin=true`
         );
         if (!items || items.length === 0) {
           Toast.fire({

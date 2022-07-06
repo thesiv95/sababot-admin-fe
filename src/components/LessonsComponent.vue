@@ -13,7 +13,9 @@ export default {
       let items;
 
       if (number) {
-        items = await Api.doGetRequest(`/youtube/search?title=${number}`);
+        items = await Api.doGetRequest(
+          `/youtube/search?title=${number}&admin=true`
+        );
       } else {
         items = await Api.doGetRequest("/youtube/getAllItems");
       }
@@ -125,7 +127,9 @@ export default {
       let items;
 
       if (text) {
-        items = await Api.doGetRequest(`/youtube/search?title=${text}`);
+        items = await Api.doGetRequest(
+          `/youtube/search?title=${text}&admin=true`
+        );
       } else {
         items = await Api.doGetRequest("/youtube/getAllItems");
       }

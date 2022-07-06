@@ -14,16 +14,16 @@ export default {
         let items;
 
         if (!q) {
-          items = await Api.doGetRequest("/nsfws/getAllItems");
+          items = await Api.doGetRequest("/shovers/getAllItems");
         } else {
-          items = await Api.doGetRequest(`/nsfws/search?q=${q}&admin=true`);
+          items = await Api.doGetRequest(`/shovers/search?q=${q}&admin=true`);
         }
 
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
-            title: `Нет слов по запросу ${
-              q.length > 10 ? q.slice(0, 10) + "..." : q
+            title: `Нет скороговорок по запросу ${
+              q.length >= 7 ? q.slice(0, 7) + "..." : q
             } в базе`,
           });
           return;
@@ -36,7 +36,9 @@ export default {
       const Toast = getToast(this.$swal);
       setTimeout(async () => {
         const page = event.target.value || 1;
-        const items = await Api.doGetRequest(`/nsfws/getAllItems?page=${page}`);
+        const items = await Api.doGetRequest(
+          `/shovers/getAllItems?page=${page}`
+        );
         if (!items || items.length === 0) {
           Toast.fire({
             icon: "error",
@@ -82,7 +84,7 @@ export default {
         const [ru, translit, he] = formValues;
 
         const apiResponse = await Api.doPutRequest(
-          `/nsfws/modify/${recordId}`,
+          `/shovers/modify/${recordId}`,
           {
             ru,
             translit,
@@ -93,7 +95,7 @@ export default {
         if (!apiResponse.isError && apiResponse.code === 202) {
           Toast.fire({
             icon: "success",
-            title: "Слово изменено в базе",
+            title: "Скороговорка изменена в базе",
           });
         } else {
           console.error(apiResponse);
@@ -113,12 +115,12 @@ export default {
       const confirmation = await showConfirmation(this.$swal, recordId);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
-          `/nsfws/remove/${recordId}`
+          `/shovers/remove/${recordId}`
         );
         if (!apiResponse.isError && apiResponse.code === 200) {
           Toast.fire({
             icon: "success",
-            title: "Слово удалено из базы!",
+            title: "Скороговорка удалена из базы!",
           });
         } else {
           console.error(apiResponse);
@@ -154,17 +156,16 @@ export default {
       if (formValues) {
         const [ru, translit, he] = formValues;
 
-        const apiResponse = await Api.doPostRequest("/nsfws/addNew", {
+        const apiResponse = await Api.doPostRequest("/shovers/addNew", {
           ru,
           translit,
           he,
         });
 
         if (!apiResponse.isError && apiResponse.code === 201) {
-          this.items.unshift(apiResponse.data); // add visually
           Toast.fire({
             icon: "success",
-            title: "Плохое слово добавлено в базу",
+            title: "Скороговорка добавлена в базу",
           });
         } else {
           console.error(apiResponse);
@@ -179,15 +180,15 @@ export default {
       const Toast = getToast(this.$swal);
       const confirmation = await showConfirmation(
         this.$swal,
-        "слова 18+",
+        "скороговорки",
         false
       );
       if (confirmation.isConfirmed) {
-        const apiResponse = await Api.doGetRequest("/nsfws/restore");
+        const apiResponse = await Api.doGetRequest("/shovers/restore");
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
-            title: "Все слова восстановлены из резервной копии",
+            title: "Все скороговорки восстановлены из резервной копии",
           });
         } else {
           console.error(apiResponse);
@@ -207,7 +208,7 @@ export default {
         // get number field
         const currentPage = event.path[6].children[1].children[1].value || 1;
         const items = await Api.doGetRequest(
-          `/nsfws/getAllItems?sort=1&page=${currentPage}`
+          `/shovers/getAllItems?sort=1&page=${currentPage}`
         );
         this.items = items;
         this.loading = false;
@@ -219,7 +220,7 @@ export default {
       setTimeout(async () => {
         const currentPage = event.path[6].children[1].children[1].value || 1;
         const items = await Api.doGetRequest(
-          `/nsfws/getAllItems?sort=-1&page=${currentPage}`
+          `/shovers/getAllItems?sort=-1&page=${currentPage}`
         );
         this.items = items;
         this.loading = false;
@@ -233,7 +234,7 @@ export default {
     };
   },
   async created() {
-    const items = await Api.doGetRequest("/nsfws/getAllItems");
+    const items = await Api.doGetRequest("/shovers/getAllItems");
     this.items = items;
     this.loading = false;
   },
@@ -271,7 +272,11 @@ export default {
     </table>
   </div>
   <div>
-    <input v-on:change="searchByWord" type="text" placeholder="Поиск слова" />
+    <input
+      v-on:change="searchByWord"
+      type="text"
+      placeholder="Поиск скороговорки"
+    />
     <input
       v-on:change="searchByPage"
       type="number"

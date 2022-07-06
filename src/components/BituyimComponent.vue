@@ -16,7 +16,7 @@ export default {
         if (!q) {
           items = await Api.doGetRequest("/bituyim/getAllItems");
         } else {
-          items = await Api.doGetRequest(`/bituyim/search?q=${q}`);
+          items = await Api.doGetRequest(`/bituyim/search?q=${q}&admin=true`);
         }
 
         if (!items || items.length === 0) {
@@ -273,7 +273,11 @@ export default {
     </table>
   </div>
   <div>
-    <input v-on:change="searchByWord" type="text" placeholder="Поиск слова" />
+    <input
+      v-on:change="searchByWord"
+      type="text"
+      placeholder="Поиск поговорки"
+    />
     <input
       v-on:change="searchByPage"
       type="number"

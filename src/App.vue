@@ -72,6 +72,11 @@ import { RouterLink, RouterView } from "vue-router";
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">
+                    <RouterLink to="/shovers" class="t-menu__link-item menu">
+                      Скороговорки
+                    </RouterLink>
+                  </li>
+                  <li class="t228__list_item">
                     <RouterLink to="/reminder" class="t-menu__link-item menu">
                       Напоминалка
                     </RouterLink>

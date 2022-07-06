@@ -16,7 +16,7 @@ export default {
         if (!q) {
           items = await Api.doGetRequest("/tshokim/getAllItems");
         } else {
-          items = await Api.doGetRequest(`/tshokim/search?q=${q}`);
+          items = await Api.doGetRequest(`/tshokim/search?q=${q}&admin=true`);
         }
 
         if (!items || items.length === 0) {
@@ -112,8 +112,7 @@ export default {
       const Toast = getToast(this.$swal);
       // get record ID
       const recordId = event.path[2].children[0].innerText;
-      const word = event.path[2].children[3].innerText.slice(0, 12) + "...";
-      const confirmation = await showConfirmation(this.$swal, word);
+      const confirmation = await showConfirmation(this.$swal, recordId);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
           `/tshokim/remove/${recordId}`
@@ -239,7 +238,6 @@ export default {
 </script>
 
 <template>
-  <div v-if="this.loading"><LoadingComponent /></div>
   <div>
     <table class="main_table" v-if="!this.loading && this.items.length > 0">
       <thead>
@@ -270,7 +268,7 @@ export default {
     </table>
   </div>
   <div>
-    <input v-on:change="searchByWord" type="text" placeholder="Поиск слова" />
+    <input v-on:change="searchByWord" type="text" placeholder="Поиск шутки" />
     <input
       v-on:change="searchByPage"
       type="number"
