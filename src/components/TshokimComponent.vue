@@ -1,5 +1,6 @@
 <script lang="ts">
 import * as Api from "@/utils/api";
+import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS } from "@/utils/consts";
@@ -93,6 +94,9 @@ export default {
         );
 
         if (!apiResponse.isError && apiResponse.code === 202) {
+          const oldRecord = { _id: recordId, ru, translit, he };
+          const newItems = GuiModify.afterRename(this.items, oldRecord, apiResponse.data);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Слово изменено в базе",
@@ -118,9 +122,11 @@ export default {
           `/tshokim/remove/${recordId}`
         );
         if (!apiResponse.isError && apiResponse.code === 200) {
+          const newItems = GuiModify.afterDelete(this.items, recordId);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
-            title: "Слово удалено из базы!",
+            title: "Слово удалено из базы (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
@@ -163,6 +169,8 @@ export default {
         });
 
         if (!apiResponse.isError && apiResponse.code === 201) {
+          const newItems = GuiModify.afterInsert(this.items, apiResponse.data);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Шутка добавлена в базу",
@@ -184,7 +192,7 @@ export default {
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
-            title: "Все шутки восстановлены из резервной копии",
+            title: "Все шутки восстановлены из резервной копии (обновите страницу)",
           });
         } else {
           console.error(apiResponse);

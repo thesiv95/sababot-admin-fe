@@ -1,5 +1,6 @@
 <script lang="ts">
 import * as Api from "@/utils/api";
+import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS } from "@/utils/consts";
@@ -31,6 +32,12 @@ export default {
             title: "Произошла ошибка",
           });
         } else {
+          const newItems = GuiModify.afterChangeReminderStatus(
+            this.items,
+            userId,
+            true
+          );
+          this.items = newItems;
           this.$swal.fire("Включено", "", "success");
         }
       } else if (modalResult.isDenied) {
@@ -44,6 +51,12 @@ export default {
             title: "Произошла ошибка",
           });
         } else {
+          const newItems = GuiModify.afterChangeReminderStatus(
+            this.items,
+            userId,
+            false
+          );
+          this.items = newItems;
           this.$swal.fire("Отключено", "", "success");
         }
       } else {
@@ -58,12 +71,12 @@ export default {
         false
       );
       if (confirmation.isConfirmed) {
-        const apiResponse = await Api.doGetRequest("/nsfws/restore");
+        const apiResponse = await Api.doGetRequest("/reminders/restore");
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
             title:
-              "Вся информация о напоминалках восстановлена из резервной копии",
+              "Вся информация о напоминалках восстановлена из резервной копии (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
@@ -129,6 +142,8 @@ export default {
           `/reminders/remove/${userId}`
         );
         if (!apiResponse.isError && apiResponse.code === 200) {
+          const newItems = GuiModify.afterDeleteReminder(this.items, userId);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Пользователь удален из базы!",
@@ -169,6 +184,8 @@ export default {
         );
 
         if (apiResponse && apiResponse.isNewUser) {
+          const newItems = GuiModify.afterInsertReminder(this.items, apiResponse.data);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Пользователь добавлен в базу",

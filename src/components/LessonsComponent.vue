@@ -1,8 +1,10 @@
 <script lang="ts">
 import * as Api from "@/utils/api";
+import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS } from "@/utils/consts";
+import type { Lesson } from "@/types/lesson.type";
 
 export default {
   methods: {
@@ -73,6 +75,9 @@ export default {
         );
 
         if (!apiResponse.isError && apiResponse.code === 202) {
+          const oldRecord: Lesson = { _id: recordId, index, title, url };
+          const newItems = GuiModify.afterRenameLesson(this.items, oldRecord, apiResponse.data);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Урок изменен в базе",
@@ -105,9 +110,11 @@ export default {
           `/youtube/remove/${recordId}`
         );
         if (!apiResponse.isError && apiResponse.code === 200) {
+          const newItems = GuiModify.afterDeleteLesson(this.items, recordId);
+          this.items = newItems;
           Toast.fire({
             icon: "success",
-            title: "Урок удален из базы!",
+            title: "Урок удален из базы (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
@@ -193,6 +200,11 @@ export default {
         });
 
         if (!apiResponse.isError && apiResponse.code === 201) {
+          const newItems = GuiModify.afterInsertLesson(
+            this.items,
+            apiResponse.data
+          );
+          this.items = newItems;
           Toast.fire({
             icon: "success",
             title: "Урок добавлен в базу",
@@ -218,7 +230,7 @@ export default {
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
-            title: "Все ссылки на уроки восстановлены из резервной копии",
+            title: "Все ссылки на уроки восстановлены из резервной копии (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
