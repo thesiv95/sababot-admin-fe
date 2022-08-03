@@ -17,7 +17,7 @@ import { RouterLink, RouterView } from "vue-router";
           class="t228 t228__positionfixed"
           style="
             background-color: rgba(242, 244, 246, 0);
-            height: 150px;
+            height: 50px;
             box-shadow: none;
           "
         >
@@ -98,12 +98,11 @@ import { RouterLink, RouterView } from "vue-router";
     <!--/header-->
   </div>
   <div id="rec263037625" class="r t-rec">
-    <div class="t-cover" style="height: 100vh; background: #fff">
+    <div class="t-cover" style="background: #fff">
       <div class="t-container">
         <div class="t-col t-col_12">
           <div class="t102 t-align_center">
             <RouterView />
-            <br />
             <br />
             <p class="copyright">
               &copy; thesiv95, 2022{{
