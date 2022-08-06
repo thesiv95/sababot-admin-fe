@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://github.com/thesiv95/sababot-admin-fe/compare/v1.4.2...v1.4.3) (2022-08-06)
+
+
+### Bug Fixes
+
+* add cursor pointer to buttons ([88fd8c6](https://github.com/thesiv95/sababot-admin-fe/commit/88fd8c6c8e8b199488cf0fdad9f8f58a481f49c0))
+
 ### [1.4.2](https://github.com/thesiv95/sababot-admin-fe/compare/v1.4.1...v1.4.2) (2022-08-03)
 
 
