@@ -114,7 +114,7 @@ export default {
           this.items = newItems;
           Toast.fire({
             icon: "success",
-            title: "Урок удален из базы (обновите страницу)",
+            title: "Урок удален из базы",
           });
         } else {
           console.error(apiResponse);

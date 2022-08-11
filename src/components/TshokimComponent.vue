@@ -126,7 +126,7 @@ export default {
           this.items = newItems;
           Toast.fire({
             icon: "success",
-            title: "Слово удалено из базы (обновите страницу)",
+            title: "Слово удалено из базы",
           });
         } else {
           console.error(apiResponse);

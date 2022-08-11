@@ -130,7 +130,7 @@ export default {
           this.items = newItems;
           Toast.fire({
             icon: "success",
-            title: "Скороговорка удалена из базы (обновите страницу)",
+            title: "Скороговорка удалена из базы",
           });
         } else {
           console.error(apiResponse);
