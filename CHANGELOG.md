@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/thesiv95/sababot-admin-fe/compare/v1.4.3...v1.4.4) (2022-08-11)
+
+
+### Bug Fixes
+
+* correct deletion success messages ([19eca40](https://github.com/thesiv95/sababot-admin-fe/commit/19eca408480e38dd32f2ca2cefc38ffd9239a56f))
+
 ### [1.4.3](https://github.com/thesiv95/sababot-admin-fe/compare/v1.4.2...v1.4.3) (2022-08-06)
 
 
