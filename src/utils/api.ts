@@ -51,5 +51,3 @@ export const doDeleteRequest = async (path: string) => {
     throw new Error(errorCasted);
   }
 };
-
-

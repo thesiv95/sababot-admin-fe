@@ -298,6 +298,7 @@ export default {
       type="number"
       placeholder="Страница"
       value="1"
+      min="1"
     />
     <button v-on:click="showAddWindow">Добавить...</button>
     <button v-on:click="showRestoreWindow">Восстановить все</button>

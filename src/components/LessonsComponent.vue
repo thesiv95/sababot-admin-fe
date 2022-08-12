@@ -76,7 +76,11 @@ export default {
 
         if (!apiResponse.isError && apiResponse.code === 202) {
           const oldRecord: Lesson = { _id: recordId, index, title, url };
-          const newItems = GuiModify.afterRenameLesson(this.items, oldRecord, apiResponse.data);
+          const newItems = GuiModify.afterRenameLesson(
+            this.items,
+            oldRecord,
+            apiResponse.data
+          );
           this.items = newItems;
           Toast.fire({
             icon: "success",
@@ -230,7 +234,8 @@ export default {
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
-            title: "Все ссылки на уроки восстановлены из резервной копии (обновите страницу)",
+            title:
+              "Все ссылки на уроки восстановлены из резервной копии (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
@@ -322,6 +327,7 @@ export default {
       v-on:change="searchByNumber"
       type="number"
       placeholder="Поиск урока по номеру"
+      min="1"
     />
     <input
       v-on:change="searchByText"

@@ -93,7 +93,11 @@ export default {
 
         if (!apiResponse.isError && apiResponse.code === 202) {
           const oldRecord = { _id: recordId, ru, translit, he };
-          const newItems = GuiModify.afterRename(this.items, oldRecord, apiResponse.data);
+          const newItems = GuiModify.afterRename(
+            this.items,
+            oldRecord,
+            apiResponse.data
+          );
           this.items = newItems;
           Toast.fire({
             icon: "success",
@@ -194,7 +198,8 @@ export default {
         if (apiResponse && apiResponse.restored) {
           Toast.fire({
             icon: "success",
-            title: "Все слова восстановлены из резервной копии (обновите страницу)",
+            title:
+              "Все слова восстановлены из резервной копии (обновите страницу)",
           });
         } else {
           console.error(apiResponse);
@@ -284,6 +289,7 @@ export default {
       type="number"
       placeholder="Страница"
       value="1"
+      min="1"
     />
     <button v-on:click="showAddWindow">Добавить...</button>
     <button v-on:click="showRestoreWindow">Восстановить все</button>

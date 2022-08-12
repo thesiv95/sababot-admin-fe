@@ -184,7 +184,10 @@ export default {
         );
 
         if (apiResponse && apiResponse.isNewUser) {
-          const newItems = GuiModify.afterInsertReminder(this.items, apiResponse.data);
+          const newItems = GuiModify.afterInsertReminder(
+            this.items,
+            apiResponse.data
+          );
           this.items = newItems;
           Toast.fire({
             icon: "success",
@@ -280,6 +283,7 @@ export default {
       type="number"
       placeholder="Страница"
       value="1"
+      min="1"
     />
     <button v-on:click="showRestoreWindow">Восстановить все</button>
     <button v-on:click="addNewUser">Добавить</button>
