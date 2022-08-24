@@ -120,7 +120,8 @@ export default {
       const Toast = getToast(this.$swal);
       // get record ID
       const recordId = event.path[2].children[0].innerText;
-      const confirmation = await showConfirmation(this.$swal, recordId);
+      const word = event.path[2].children[3].innerText.slice(0, 12) + "...";
+      const confirmation = await showConfirmation(this.$swal, word);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
           `/tshokim/remove/${recordId}`

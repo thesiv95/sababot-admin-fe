@@ -101,14 +101,8 @@ export default {
       const Toast = getToast(this.$swal);
       // get record ID
       const recordId = event.path[2].children[0].innerText;
-      const confirmation = await this.$swal.fire({
-        title: "Подтвердите удаление",
-        text: recordId,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Да",
-        cancelButtonText: "Нет",
-      });
+      const lessonNumber = event.path[2].children[1].innerText;
+      const confirmation = await showConfirmation(this.$swal, lessonNumber);
       if (confirmation.isConfirmed) {
         const apiResponse = await Api.doDeleteRequest(
           `/youtube/remove/${recordId}`
