@@ -12,8 +12,7 @@
     "build-super": "run-p type-check build",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && echo Lint OK",
-    "changelog": "standard-version"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && echo Lint OK"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -33,7 +32,6 @@
     "eslint-plugin-vue": "^8.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
-    "standard-version": "^9.5.0",
     "typescript": "~4.7.2",
     "vite": "^2.9.9",
     "vue-tsc": "^0.35.2"
