@@ -16,6 +16,11 @@ const router = createRouter({
       component: () => import("../views/NsfwsView.vue"),
     },
     {
+      path: "/binyans",
+      name: "binyans",
+      component: () => import("../views/BinyanView.vue"),
+    },
+    {
       path: "/bituyim",
       name: "bituyim",
       component: () => import("../views/BituyimView.vue"),

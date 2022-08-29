@@ -5,8 +5,6 @@ import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
-// TODO: add, sort gui mod
-
 export default {
   methods: {
     searchByWord(event: { target: { value: string } }) {

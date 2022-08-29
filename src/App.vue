@@ -52,6 +52,11 @@ import { RouterLink, RouterView } from "vue-router";
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">
+                    <RouterLink to="/binyans" class="t-menu__link-item menu">
+                      Биньяны
+                    </RouterLink>
+                  </li>
+                  <li class="t228__list_item">
                     <RouterLink to="/nsfws" class="t-menu__link-item menu">
                       18+
                     </RouterLink>
