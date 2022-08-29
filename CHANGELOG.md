@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.0.0...v1.1.0) (2022-08-29)
+
+
+### Features
+
+* add binyan page ([fb2dac5](https://github.com/thesiv95/sababot-admin-fe/commit/fb2dac50f3ba18577e0f6b410b0a040f7137f46a))
+
 ## 1.0.0 (2022-08-27)
 
 
