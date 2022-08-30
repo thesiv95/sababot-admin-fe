@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.2](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.1...v1.1.2) (2022-08-30)
+
+
+### Bug Fixes
+
+* **binyan:** table header order ([5db76c4](https://github.com/thesiv95/sababot-admin-fe/commit/5db76c4212776b290c0ee44b27fcf48bca7ff1b2))
+
 ## [1.1.1](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.0...v1.1.1) (2022-08-30)
 
 
