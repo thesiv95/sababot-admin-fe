@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.2...v1.2.0) (2022-09-02)
+
+
+### Features
+
+* add v-else handler for table ([603ccd5](https://github.com/thesiv95/sababot-admin-fe/commit/603ccd515eff266d713598c04b35329d8092235d))
+
 ## [1.1.2](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.1...v1.1.2) (2022-08-30)
 
 
