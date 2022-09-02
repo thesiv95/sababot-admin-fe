@@ -3,6 +3,7 @@
 import type { Word } from "@/types/word.type";
 import type { Lesson } from "@/types/lesson.type";
 import type { Reminder } from "@/types/reminder.type";
+import type { Binyan } from "@/types/binyan.type";
 
 export const afterInsert = (itemsStateArray: Word[], newItem: Word) => {
   // add latest item
@@ -104,4 +105,37 @@ export const afterChangeReminderStatus = (
     }
     return item;
   });
+};
+
+
+export const afterBinyanInsert = (itemsStateArray: Binyan[], newItem: Binyan) => {
+  // add latest item
+  itemsStateArray.unshift(newItem);
+
+  // then remove oldest item
+  itemsStateArray.pop();
+
+  return itemsStateArray;
+};
+
+export const afterRenameBinyan = (
+  itemsStateArray: Binyan[],
+  oldItem: Binyan,
+  newItem: Binyan
+) => {
+  // replace by _id
+  return itemsStateArray.map((item) => {
+    if (item._id === oldItem._id) {
+      return newItem;
+    }
+    return item;
+  });
+};
+
+export const afterDeleteBinyan = (
+  itemsStateArray: Binyan[],
+  itemIdToRemove: string
+) => {
+  // not the best solution but filter by userId
+  return itemsStateArray.filter((item) => item._id !== itemIdToRemove);
 };
