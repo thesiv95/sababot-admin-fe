@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.1](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.0...v1.3.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* min input 1 to lessons page ([61bf07b](https://github.com/thesiv95/sababot-admin-fe/commit/61bf07b17459e2c4194747b54a7801fe9c8c7da8))
+
 ## [1.3.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.2.0...v1.3.0) (2022-09-02)
 
 
