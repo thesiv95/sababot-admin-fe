@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.2.0...v1.3.0) (2022-09-02)
+
+
+### Features
+
+* binyan page ([3835d9c](https://github.com/thesiv95/sababot-admin-fe/commit/3835d9c1db8b2547bf201d12ec0be6b6c110c7ed))
+
 ## [1.2.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.1.2...v1.2.0) (2022-09-02)
 
 
