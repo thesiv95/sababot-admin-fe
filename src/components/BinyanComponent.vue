@@ -194,7 +194,7 @@
           const Toast = getToast(this.$swal);
           const confirmation = await showConfirmation(
             this.$swal,
-            "поговорки",
+            "биньяны",
             false
           );
           if (confirmation.isConfirmed) {
@@ -202,7 +202,7 @@
             if (apiResponse && apiResponse.restored) {
               Toast.fire({
                 icon: "success",
-                title: "Все поговорки восстановлены из резервной копии",
+                title: "Все биньяны восстановлены из резервной копии",
               });
             } else {
               console.error(apiResponse);
@@ -308,6 +308,9 @@
             </tr>
           </tbody>
         </table>
+        <div v-else style="margin: 100px 0; color: black; font-size: 24px">
+          База данных пуста - попробуйте восстановить данные (кнопка ниже) или дождитесь загрузки
+        </div>
       </div>
       <div>
         <input

@@ -282,6 +282,9 @@ export default {
         </tr>
       </tbody>
     </table>
+    <div v-else style="margin: 100px 0; color: black; font-size: 24px">
+      База данных пуста - попробуйте восстановить данные (кнопка ниже) или дождитесь загрузки
+    </div>
   </div>
   <div>
     <input v-on:change="searchByWord" type="text" placeholder="Поиск слова" />
