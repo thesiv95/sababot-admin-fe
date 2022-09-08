@@ -1,8 +1,7 @@
 const getBinyanInput = (values?: string[]): string => {
-    
-    // if no values - this is for insert
-    if (!values) {
-        return `
+  // if no values - this is for insert
+  if (!values) {
+    return `
         <div style="display: flex"> 
           <div style="font-size: 0.9em">
             <input id="ru" placeholder="на русском" class="swal2-input">
@@ -34,11 +33,31 @@ const getBinyanInput = (values?: string[]): string => {
             <input id="theyFemalePlural" placeholder="пр.вр-они-ж.р." class="swal2-input">
           </div>
         </div>
-        `
-    } else {
-        const [infinitive, translit, ru, binyanType, root, maleSingle, femaleSingle, malePlural, femalePlural, me, youMaleSingle, youFemaleSingle, he, she, we, youMalePlural, youFemalePlural, theyMalePlural, theyFemalePlural] = values;
+        `;
+  } else {
+    const [
+      infinitive,
+      translit,
+      ru,
+      binyanType,
+      root,
+      maleSingle,
+      femaleSingle,
+      malePlural,
+      femalePlural,
+      me,
+      youMaleSingle,
+      youFemaleSingle,
+      he,
+      she,
+      we,
+      youMalePlural,
+      youFemalePlural,
+      theyMalePlural,
+      theyFemalePlural,
+    ] = values;
 
-        return `
+    return `
         <div style="display: flex"> 
           <div style="font-size: 0.9em">
             <input id="ru" placeholder="на русском" class="swal2-input" value="${ru}">
@@ -70,10 +89,8 @@ const getBinyanInput = (values?: string[]): string => {
             <input id="theyFemalePlural" placeholder="пр.вр-они-ж.р." class="swal2-input" value="${theyFemalePlural}">
           </div>
         </div>
-        `
-    }
-
-    
-}
+        `;
+  }
+};
 
 export default getBinyanInput;

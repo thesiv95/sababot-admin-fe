@@ -107,8 +107,10 @@ export const afterChangeReminderStatus = (
   });
 };
 
-
-export const afterBinyanInsert = (itemsStateArray: Binyan[], newItem: Binyan) => {
+export const afterBinyanInsert = (
+  itemsStateArray: Binyan[],
+  newItem: Binyan
+) => {
   // add latest item
   itemsStateArray.unshift(newItem);
 
