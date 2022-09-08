@@ -106,8 +106,8 @@ import parsePreviousTime from "@/utils/parsePreviousTime";
           preConfirm: () => {
             return [
               document.getElementById("infinitive").value!,
-              document.getElementById("ru").value!,
               document.getElementById("translit").value!,
+              document.getElementById("ru").value!,
               document.getElementById("binyanType").value!,
               document.getElementById("root").value!,
               document.getElementById("maleSingle").value!,

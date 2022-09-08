@@ -10,9 +10,10 @@ const parsePreviousTime = (str: string) => {
         if (el !== '') {
             // cut spaces etc
             const spaces = /\s+/g;
-            const prepositions = /я|ты\(м\)|ты\(ж\)|он|она|мы|вы\(м\)|вы\(ж\)|о?н?и\(м\)|о?н?и\(ж\)/g;
+            const prepositionsRegExp = /я|ты\(м\)|ты\(ж\)|он*|мы|вы\(м\)|вы\(ж\)|о?н?и\(м\)|о?н?и\(ж\)/g;
             el = el.replace(spaces, '').trim();
-            el = el.replace(prepositions, '');
+            el = el.replace(prepositionsRegExp, '');
+            el = el.replace('а', ''); // russian a, hot fix (bad fix but okay)
             return el;
         }
     });
