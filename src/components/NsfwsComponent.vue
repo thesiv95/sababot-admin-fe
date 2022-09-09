@@ -5,34 +5,13 @@ import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS, LOADING } from "@/utils/consts";
 import getCommonInput from "./plainHTMLs/getCommonInput";
+import nsfws_searchByWord from "./NsfwsComponent/searchByWord";
 
 export default {
   methods: {
-    searchByWord(event: { target: { value: string } }) {
+    searchByWord(event: any) {
       const Toast = getToast(this.$swal);
-
-      setTimeout(async () => {
-        const q = event.target.value;
-        let items;
-
-        if (!q) {
-          items = await Api.doGetRequest("/nsfws/getAllItems");
-        } else {
-          items = await Api.doGetRequest(`/nsfws/search?q=${q}&admin=true`);
-        }
-
-        if (!items || items.length === 0) {
-          Toast.fire({
-            icon: "error",
-            title: `Нет слов по запросу ${
-              q.length > 10 ? q.slice(0, 10) + "..." : q
-            } в базе`,
-          });
-          return;
-        }
-        this.items = items;
-        this.loading = false;
-      }, DELAY_API_REQUEST_MS);
+      return nsfws_searchByWord(event, Toast);
     },
     searchByPage(event: { target: { value: string } }) {
       const Toast = getToast(this.$swal);
@@ -61,8 +40,6 @@ export default {
         event.path[2].children[2].innerText,
         event.path[2].children[3].innerText,
       ];
-
-      const [he, translit, ru] = currentData;
 
       const { value: formValues } = await this.$swal.fire({
         title: "Изменить",
