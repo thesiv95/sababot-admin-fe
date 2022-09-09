@@ -1,6 +1,6 @@
 import format from "format";
 import * as Api from "../../utils/api";
-import { NO_WORDS_BY_QUERY } from "../../utils/consts";
+import { NO_ITEMS_BY_QUERY } from "../../utils/consts";
 
 const nsfws_searchByWord = async (event: any, Toast: any) => {
   const q = event.target.value;
@@ -16,7 +16,7 @@ const nsfws_searchByWord = async (event: any, Toast: any) => {
     Toast.fire({
       icon: "error",
       title: format(
-        NO_WORDS_BY_QUERY,
+        NO_ITEMS_BY_QUERY,
         q.length >= 10 ? q.slice(0, 10) + "..." : q
       ),
     });
