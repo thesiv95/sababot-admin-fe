@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.3](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.2...v1.3.3) (2022-09-09)
+
+
+### Bug Fixes
+
+* loading text as const, input refactor ([89e8808](https://github.com/thesiv95/sababot-admin-fe/commit/89e8808ee887126fc6e590f725b8982cbe2fe250))
+* loading text as const, input refactor ([598fe59](https://github.com/thesiv95/sababot-admin-fe/commit/598fe596f7691e6b183c16ce0702551684306afb))
+
 ## [1.3.2](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.1...v1.3.2) (2022-09-08)
 
 
