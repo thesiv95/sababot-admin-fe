@@ -3,7 +3,7 @@ import * as Api from "@/utils/api";
 import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
-import { DELAY_API_REQUEST_MS, LOADING } from "@/utils/consts";
+import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 import getBinyanInput from "./plainHTMLs/getBinyanInput";
 import parseCurrentTime from "@/utils/parseCurrentTime";
 import parsePreviousTime from "@/utils/parsePreviousTime";
@@ -99,6 +99,8 @@ export default {
         _theyMalePlural,
         _theyFemalePlural,
       ];
+
+      console.log(event.path[2].children);
 
       const binyanHTML = getBinyanInput(currentData!);
 
@@ -413,7 +415,6 @@ export default {
   data() {
     return {
       loading: true,
-      loadingText: LOADING,
       items: null,
     };
   },
@@ -479,7 +480,8 @@ export default {
       </tbody>
     </table>
     <div v-else style="margin: 100px 0; color: black; font-size: 24px">
-      {{ this.loadingText }}
+      База данных пуста - попробуйте восстановить данные (кнопка ниже) или
+      дождитесь загрузки
     </div>
   </div>
   <div>

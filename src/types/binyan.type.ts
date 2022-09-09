@@ -19,7 +19,6 @@ type BinyanPresent = {
 };
 
 export type Binyan = {
-  _id?: string; // mongoId
   translit: string;
   ru: string;
   infinitive: string;

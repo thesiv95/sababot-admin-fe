@@ -3,8 +3,7 @@ import * as Api from "@/utils/api";
 import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
-import { DELAY_API_REQUEST_MS, LOADING } from "@/utils/consts";
-import getCommonInput from "./plainHTMLs/getCommonInput";
+import { DELAY_API_REQUEST_MS } from "@/utils/consts";
 
 export default {
   methods: {
@@ -70,10 +69,13 @@ export default {
         event.path[2].children[2].innerText,
         event.path[2].children[3].innerText,
       ];
-
+      const [he, translit, ru] = currentData;
       const { value: formValues } = await this.$swal.fire({
         title: "Изменить",
-        html: getCommonInput(currentData),
+        html:
+          `<input id="ru" placeholder="на русском" class="swal2-input" value="${ru}">` +
+          `<input id="translit" placeholder="транскрипция" class="swal2-input" value="${translit}">` +
+          `<input id="he" placeholder="на иврите" class="swal2-input" value="${he}">`,
         focusConfirm: false,
         preConfirm: () => {
           return [
@@ -154,7 +156,10 @@ export default {
       const Toast = getToast(this.$swal);
       const { value: formValues } = await this.$swal.fire({
         title: "Добавить",
-        html: getCommonInput(),
+        html:
+          '<input id="ru" placeholder="на русском" class="swal2-input">' +
+          '<input id="translit" placeholder="транскрипция" class="swal2-input">' +
+          '<input id="he" placeholder="на иврите" class="swal2-input">',
         focusConfirm: false,
         preConfirm: () => {
           return [
@@ -250,7 +255,6 @@ export default {
   data() {
     return {
       loading: true,
-      loadingText: LOADING,
       items: null,
     };
   },
@@ -292,7 +296,8 @@ export default {
       </tbody>
     </table>
     <div v-else style="margin: 100px 0; color: black; font-size: 24px">
-      {{ this.loadingText }}
+      База данных пуста - попробуйте восстановить данные (кнопка ниже) или
+      дождитесь загрузки
     </div>
   </div>
   <div>
