@@ -4,12 +4,20 @@ import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
 import { DELAY_API_REQUEST_MS } from "@/utils/consts";
+import nsfws_searchByWord from "./NsfwsComponent/searchByWord";
 
 export default {
   methods: {
+    _getToast() {
+      return getToast(this.$swal);
+    },
     searchByWord(event: any) {
-      const Toast = getToast(this.$swal);
-      return nsfws_searchByWord(event, Toast);
+      setTimeout(async () => {
+        const items = await nsfws_searchByWord(event, this._getToast());
+        if (!items) return;
+        this.items = items;
+        this.loading = false;
+      }, DELAY_API_REQUEST_MS);
     },
     searchByPage(event: { target: { value: string } }) {
       const Toast = getToast(this.$swal);
@@ -38,6 +46,8 @@ export default {
         event.path[2].children[2].innerText,
         event.path[2].children[3].innerText,
       ];
+
+      const [ru, translit, he] = currentData;
 
       const { value: formValues } = await this.$swal.fire({
         title: "Изменить",
