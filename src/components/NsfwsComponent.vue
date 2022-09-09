@@ -3,7 +3,8 @@ import * as Api from "@/utils/api";
 import * as GuiModify from "@/utils/guiMod";
 import getToast from "@/utils/getToast";
 import showConfirmation from "@/utils/showConfirmation";
-import { DELAY_API_REQUEST_MS } from "@/utils/consts";
+import { DELAY_API_REQUEST_MS, LOADING } from "@/utils/consts";
+import getCommonInput from "./plainHTMLs/getCommonInput";
 
 export default {
   methods: {
@@ -65,10 +66,7 @@ export default {
 
       const { value: formValues } = await this.$swal.fire({
         title: "Изменить",
-        html:
-          `<input id="ru" placeholder="на русском" class="swal2-input" value="${ru}">` +
-          `<input id="translit" placeholder="транскрипция" class="swal2-input" value="${translit}">` +
-          `<input id="he" placeholder="на иврите" class="swal2-input" value="${he}">`,
+        html: getCommonInput(currentData),
         focusConfirm: false,
         preConfirm: () => {
           return [
@@ -148,10 +146,7 @@ export default {
 
       const { value: formValues } = await this.$swal.fire({
         title: "Добавить",
-        html:
-          '<input id="ru" placeholder="на русском" class="swal2-input">' +
-          '<input id="translit" placeholder="транскрипция" class="swal2-input">' +
-          '<input id="he" placeholder="на иврите" class="swal2-input">',
+        html: getCommonInput(),
         focusConfirm: false,
         preConfirm: () => {
           return [
@@ -242,6 +237,7 @@ export default {
   data() {
     return {
       loading: true,
+      loadingText: LOADING,
       items: null,
     };
   },
@@ -283,8 +279,7 @@ export default {
       </tbody>
     </table>
     <div v-else style="margin: 100px 0; color: black; font-size: 24px">
-      База данных пуста - попробуйте восстановить данные (кнопка ниже) или
-      дождитесь загрузки
+      {{ this.loadingText }}
     </div>
   </div>
   <div>
