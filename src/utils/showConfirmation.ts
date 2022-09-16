@@ -1,3 +1,5 @@
+import { CONFIRM_DELETE, CONFIRM_RESTORE, NO, YES } from "./consts";
+
 const showConfirmation = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   swalInstance: any,
@@ -5,12 +7,12 @@ const showConfirmation = async (
   toDelete = true
 ) => {
   return swalInstance.fire({
-    title: toDelete ? "Подтвердите удаление" : "Подтвердите восстановление",
+    title: toDelete ? CONFIRM_DELETE : CONFIRM_RESTORE,
     text,
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Да",
-    cancelButtonText: "Нет",
+    confirmButtonText: YES,
+    cancelButtonText: NO,
   });
 };
 

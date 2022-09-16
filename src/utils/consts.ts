@@ -8,3 +8,7 @@ export const ITEM_MODIFIED = "Успешно изменено в базе";
 export const ITEM_DELETED = "Успешно удалено из базы";
 export const ITEMS_RESTORED = "Все %s восстановлены из резервной копии (обновите страницу)";
 export const ERROR500 = "Произошла ошибка";
+export const CONFIRM_DELETE = "Подтвердите удаление";
+export const CONFIRM_RESTORE = "Подтвердите восстановление";
+export const YES = "Да";
+export const NO = "Нет";
