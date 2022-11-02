@@ -11,6 +11,11 @@ const router = createRouter({
       component: () => import("../views/WordsView.vue"),
     },
     {
+      path: "/doubles",
+      name: "doubles",
+      component: () => import("../views/DoublesView.vue"),
+    },
+    {
       path: "/nsfws",
       name: "nsfws",
       component: () => import("../views/NsfwsView.vue"),

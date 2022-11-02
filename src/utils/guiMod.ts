@@ -4,6 +4,7 @@ import type { Word } from "@/types/word.type";
 import type { Lesson } from "@/types/lesson.type";
 import type { Reminder } from "@/types/reminder.type";
 import type { Binyan } from "@/types/binyan.type";
+import type { Double } from "@/types/double.type";
 
 export const afterInsert = (itemsStateArray: Word[], newItem: Word) => {
   // add latest item
@@ -136,6 +137,42 @@ export const afterRenameBinyan = (
 
 export const afterDeleteBinyan = (
   itemsStateArray: Binyan[],
+  itemIdToRemove: string
+) => {
+  // not the best solution but filter by userId
+  return itemsStateArray.filter((item) => item._id !== itemIdToRemove);
+};
+
+// -----------------
+export const afterDoubleInsert = (
+  itemsStateArray: Double[],
+  newItem: Double
+) => {
+  // add latest item
+  itemsStateArray.unshift(newItem);
+
+  // then remove oldest item
+  itemsStateArray.pop();
+
+  return itemsStateArray;
+};
+
+export const afterRenameDouble = (
+  itemsStateArray: Double[],
+  oldItem: Double,
+  newItem: Double
+) => {
+  // replace by _id
+  return itemsStateArray.map((item) => {
+    if (item._id === oldItem._id) {
+      return newItem;
+    }
+    return item;
+  });
+};
+
+export const afterDeleteDouble = (
+  itemsStateArray: Double[],
   itemIdToRemove: string
 ) => {
   // not the best solution but filter by userId

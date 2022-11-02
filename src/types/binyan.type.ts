@@ -19,6 +19,7 @@ type BinyanPresent = {
 };
 
 export type Binyan = {
+  _id?: string;
   translit: string;
   ru: string;
   infinitive: string;

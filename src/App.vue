@@ -52,6 +52,11 @@ import { RouterLink, RouterView } from "vue-router";
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">
+                    <RouterLink to="/doubles" class="t-menu__link-item menu">
+                      Двойные
+                    </RouterLink>
+                  </li>
+                  <li class="t228__list_item">
                     <RouterLink to="/binyans" class="t-menu__link-item menu">
                       Биньяны
                     </RouterLink>
