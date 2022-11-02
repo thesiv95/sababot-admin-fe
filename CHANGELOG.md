@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.3...v1.4.0) (2022-11-02)
+
+
+### Features
+
+* add doubles page (unfinished) ([399b5b3](https://github.com/thesiv95/sababot-admin-fe/commit/399b5b3ff852213735ae8511453f26adec57fb33))
+
 ## [1.3.3](https://github.com/thesiv95/sababot-admin-fe/compare/v1.3.2...v1.3.3) (2022-09-09)
 
 
