@@ -67,168 +67,168 @@ export default {
       const [ru, single, double] = currentData;
 
       const apiResponse = await Api.doPutRequest(
-          `/doubles/modify/${recordId}`,
-          {
-            ru,
-            single,
-            double,
-          }
-        );
-
-        if (!apiResponse.isError && apiResponse.code === 202) {
-          const oldRecord = {
-            _id: recordId,
-            ru,
-            single,
-            double
-          };
-          const newItems = GuiModify.afterRenameDouble(
-            this.items,
-            oldRecord,
-            apiResponse.data
-          );
-          this.items = newItems;
-
-          Toast.fire({
-            icon: "success",
-            title: "Слово изменено в базе",
-          });
-        } else {
-          console.error(apiResponse);
-          Toast.fire({
-            icon: "error",
-            title: "Произошла ошибка",
-          });
+        `/doubles/modify/${recordId}`,
+        {
+          ru,
+          single,
+          double,
         }
+      );
+
+      if (!apiResponse.isError && apiResponse.code === 202) {
+        const oldRecord = {
+          _id: recordId,
+          ru,
+          single,
+          double,
+        };
+        const newItems = GuiModify.afterRenameDouble(
+          this.items,
+          oldRecord,
+          apiResponse.data
+        );
+        this.items = newItems;
+
+        Toast.fire({
+          icon: "success",
+          title: "Слово изменено в базе",
+        });
+      } else {
+        console.error(apiResponse);
+        Toast.fire({
+          icon: "error",
+          title: "Произошла ошибка",
+        });
       }
     },
-    async showDeleteWindow(event: {
-      path: { children: { innerText: string }[] }[];
-    }) {
-      const Toast = getToast(this.$swal);
-      // get record ID
-      const recordId = event.path[2].children[0].innerText;
-      const word = event.path[2].children[3].innerText.slice(0, 12) + "...";
-      const confirmation = await showConfirmation(this.$swal, word);
-      if (confirmation.isConfirmed) {
-        const apiResponse = await Api.doDeleteRequest(
-          `/doubles/remove/${recordId}`
-        );
-        if (!apiResponse.isError && apiResponse.code === 200) {
-          const newItems = GuiModify.afterDeleteDouble(this.items, recordId);
-          this.items = newItems;
-          Toast.fire({
-            icon: "success",
-            title: "Слово удалено из базы!",
-          });
-        } else {
-          console.error(apiResponse);
-          Toast.fire({
-            icon: "error",
-            title: "Произошла ошибка",
-          });
-        }
-      } else if (confirmation.dismiss === this.$swal.DismissReason.cancel) {
-        return;
+  },
+  async showDeleteWindow(event: {
+    path: { children: { innerText: string }[] }[];
+  }) {
+    const Toast = getToast(this.$swal);
+    // get record ID
+    const recordId = event.path[2].children[0].innerText;
+    const word = event.path[2].children[3].innerText.slice(0, 12) + "...";
+    const confirmation = await showConfirmation(this.$swal, word);
+    if (confirmation.isConfirmed) {
+      const apiResponse = await Api.doDeleteRequest(
+        `/doubles/remove/${recordId}`
+      );
+      if (!apiResponse.isError && apiResponse.code === 200) {
+        const newItems = GuiModify.afterDeleteDouble(this.items, recordId);
+        this.items = newItems;
+        Toast.fire({
+          icon: "success",
+          title: "Слово удалено из базы!",
+        });
+      } else {
+        console.error(apiResponse);
+        Toast.fire({
+          icon: "error",
+          title: "Произошла ошибка",
+        });
       }
-    },
-    async showAddWindow() {
-      // toast appears for several seconds at right top
-      const Toast = getToast(this.$swal);
+    } else if (confirmation.dismiss === this.$swal.DismissReason.cancel) {
+      return;
+    }
+  },
+  async showAddWindow() {
+    // toast appears for several seconds at right top
+    const Toast = getToast(this.$swal);
 
-      const doublesHTML = getDoubles();
+    const doublesHTML = getDoubles();
 
-      const { value: formValues } = await this.$swal.fire({
-        title: "Добавить",
-        html: doublesHTML,
-        focusConfirm: false,
-        preConfirm: () => {
-          return [
-            document.getElementById("ru").value!,
-            document.getElementById("single").value!,
-            document.getElementById("double").value!,
-          ];
-        },
+    const { value: formValues } = await this.$swal.fire({
+      title: "Добавить",
+      html: doublesHTML,
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById("ru").value!,
+          document.getElementById("single").value!,
+          document.getElementById("double").value!,
+        ];
+      },
+    });
+
+    if (formValues) {
+      const [ru, single, double] = formValues;
+
+      const apiResponse = await Api.doPostRequest("/doubles/addNew", {
+        ru,
+        single,
+        double,
       });
 
-      if (formValues) {
-        const [
-          ru,
-          single,
-          double,
-        ] = formValues;
-
-        const apiResponse = await Api.doPostRequest("/doubles/addNew", {
-          ru,
-          single,
-          double,
+      if (!apiResponse.isError && apiResponse.code === 201) {
+        const newItems = GuiModify.afterDoubleInsert(
+          this.items,
+          apiResponse.data
+        );
+        this.items = newItems;
+        Toast.fire({
+          icon: "success",
+          title: "Слово добавлено в базу",
         });
-
-        if (!apiResponse.isError && apiResponse.code === 201) {
-          const newItems = GuiModify.afterDoubleInsert(
-            this.items,
-            apiResponse.data
-          );
-          this.items = newItems;
-          Toast.fire({
-            icon: "success",
-            title: "Слово добавлено в базу",
-          });
-        } else {
-          console.error(apiResponse);
-          Toast.fire({
-            icon: "error",
-            title: "Произошла ошибка",
-          });
-        }
+      } else {
+        console.error(apiResponse);
+        Toast.fire({
+          icon: "error",
+          title: "Произошла ошибка",
+        });
       }
-    },
-    async showRestoreWindow() {
-      const Toast = getToast(this.$swal);
-      const confirmation = await showConfirmation(this.$swal, "двойные слова", false);
-      if (confirmation.isConfirmed) {
-        const apiResponse = await Api.doGetRequest("/doubles/restore");
-        if (apiResponse && apiResponse.restored) {
-          Toast.fire({
-            icon: "success",
-            title: "Все слова восстановлены из резервной копии",
-          });
-        } else {
-          console.error(apiResponse);
-          Toast.fire({
-            icon: "error",
-            title: "Произошла ошибка",
-          });
-        }
-      } else if (confirmation.dismiss === this.$swal.DismissReason.cancel) {
-        return;
+    }
+  },
+  async showRestoreWindow() {
+    const Toast = getToast(this.$swal);
+    const confirmation = await showConfirmation(
+      this.$swal,
+      "двойные слова",
+      false
+    );
+    if (confirmation.isConfirmed) {
+      const apiResponse = await Api.doGetRequest("/doubles/restore");
+      if (apiResponse && apiResponse.restored) {
+        Toast.fire({
+          icon: "success",
+          title: "Все слова восстановлены из резервной копии",
+        });
+      } else {
+        console.error(apiResponse);
+        Toast.fire({
+          icon: "error",
+          title: "Произошла ошибка",
+        });
       }
-    },
-    sortAsc(event: {
-      path: { children: { children: { value: number }[] }[] }[];
-    }) {
-      setTimeout(async () => {
-        // get number field
-        const currentPage = event.path[6].children[1].children[1].value || 1;
-        const items = await Api.doGetRequest(
-          `/doubles/getAllItems?sort=1&page=${currentPage}`
-        );
-        this.items = items;
-        this.loading = false;
-      }, DELAY_API_REQUEST_MS);
-    },
-    sortDesc(event: {
-      path: { children: { children: { value: number }[] }[] }[];
-    }) {
-      setTimeout(async () => {
-        const currentPage = event.path[6].children[1].children[1].value || 1;
-        const items = await Api.doGetRequest(
-          `/doubles/getAllItems?sort=-1&page=${currentPage}`
-        );
-        this.items = items;
-        this.loading = false;
-      }, DELAY_API_REQUEST_MS);
-    },
+    } else if (confirmation.dismiss === this.$swal.DismissReason.cancel) {
+      return;
+    }
+  },
+  sortAsc(event: {
+    path: { children: { children: { value: number }[] }[] }[];
+  }) {
+    setTimeout(async () => {
+      // get number field
+      const currentPage = event.path[6].children[1].children[1].value || 1;
+      const items = await Api.doGetRequest(
+        `/doubles/getAllItems?sort=1&page=${currentPage}`
+      );
+      this.items = items;
+      this.loading = false;
+    }, DELAY_API_REQUEST_MS);
+  },
+  sortDesc(event: {
+    path: { children: { children: { value: number }[] }[] }[];
+  }) {
+    setTimeout(async () => {
+      const currentPage = event.path[6].children[1].children[1].value || 1;
+      const items = await Api.doGetRequest(
+        `/doubles/getAllItems?sort=-1&page=${currentPage}`
+      );
+      this.items = items;
+      this.loading = false;
+    }, DELAY_API_REQUEST_MS);
+  },
   data() {
     return {
       loading: true,
