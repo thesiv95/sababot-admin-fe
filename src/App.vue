@@ -52,8 +52,8 @@ import { RouterLink, RouterView } from "vue-router";
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">
-                    <RouterLink to="/doubles" class="t-menu__link-item menu">
-                      Двойные
+                    <RouterLink to="/war" class="t-menu__link-item menu">
+                      Война
                     </RouterLink>
                   </li>
                   <li class="t228__list_item">

@@ -11,9 +11,9 @@ const router = createRouter({
       component: () => import("../views/WordsView.vue"),
     },
     {
-      path: "/doubles",
-      name: "doubles",
-      component: () => import("../views/DoublesView.vue"),
+      path: "/war",
+      name: "war",
+      component: () => import("../views/WarWordsView.vue"),
     },
     {
       path: "/nsfws",
